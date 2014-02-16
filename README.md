@@ -10,3 +10,7 @@ Installation
 2. Unzip to wp-content/plugins/potcoinstatswidget
 3. Activate plugin in Wordpress (Plugins -> Installed Plugins -> Potcoin Stats Widget -> Activate)
 4. Drag widget to a widget area (Appearance -> Widgets -> Potcoin Exchange Rate)
+
+<img src="http://i.imgur.com/6IxCdEu.png">
+
+Potcoin Stats Widget under TwentyFourteen theme.
