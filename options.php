@@ -66,7 +66,7 @@ class MySettingsPage
 
         add_settings_section(
             'setting_section_id', // ID
-            'Cryptorush API Settings', // Title
+            '<a href="http://cryptorush.in">Cryptorush.in</a> API Settings', // Title
             array( $this, 'print_section_info' ), // Callback
             'my-setting-admin' // Page
         );  

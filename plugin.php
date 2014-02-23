@@ -63,8 +63,11 @@ class PotcoinStatsWidget extends WP_Widget
     echo $before_widget;
     $title = $instance['title'];
 
-    if (!empty($title))
-      echo $before_title . $title . $after_title;;
+    if (!empty($title)) {
+        echo $before_title . $title . $after_title;
+    } else {
+        echo $before_title . "Potcoin Exchange Rate" . $after_title;
+    }
 
     $poturl = "https://cryptorush.in/index.php?p=trading&m=POT&b=BTC";
     $btcurl = "https://blockchain.info";
