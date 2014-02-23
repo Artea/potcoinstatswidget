@@ -61,7 +61,7 @@ class PotcoinStatsWidget extends WP_Widget
     $ratepotusd = ($ratepotbtc * $ratebtcusd);
 
     echo $before_widget;
-    $title = "Potcoin Exchange Rate";
+    $title = $instance['title'];
 
     if (!empty($title))
       echo $before_title . $title . $after_title;;
