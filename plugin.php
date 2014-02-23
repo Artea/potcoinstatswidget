@@ -5,11 +5,11 @@ Plugin Name: Potcoin Stats Widget
 Plugin URI: https://github.com/dbsnurr/potcoinstatswidget
 Description: Display the latest potcoin / usd exchange rate
 Author: dbsnurr
-Version: 1
+Version: 1.1
 Author URI: https://github.com/dbsnurr
 */
 
-define('PTSW_DIR', WP_PLUGIN_DIR . '/potcoinstatswidget');
+define('PTSW_DIR', dirname(__FILE__));
 include(PTSW_DIR . '/options.php');
 
 class PotcoinStatsWidget extends WP_Widget
