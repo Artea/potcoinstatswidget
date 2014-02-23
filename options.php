@@ -40,7 +40,7 @@ class MySettingsPage
         ?>
         <div class="wrap">
             <?php screen_icon(); ?>
-            <h2>My Settings</h2>           
+            <h2>Potcoin Stats Widget Settings</h2>           
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
@@ -66,7 +66,7 @@ class MySettingsPage
 
         add_settings_section(
             'setting_section_id', // ID
-            'Potcoin Stats Widget Settings', // Title
+            'Cryptorush API Settings', // Title
             array( $this, 'print_section_info' ), // Callback
             'my-setting-admin' // Page
         );  
