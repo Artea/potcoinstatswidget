@@ -72,7 +72,7 @@ class PotcoinStatsWidget extends WP_Widget
     $poturl = "https://cryptorush.in/index.php?p=trading&m=POT&b=BTC";
     $btcurl = "https://blockchain.info";
     $potusdstat = '<h4><a href="'. $poturl .'">POT/USD</a></h4>' . '$' . $ratepotusd;
-    $potbtcstat = '<h4><a href="'. $btcurl .'">POT/BTC</a></h4>' . 'B⃦' . $ratepotbtc;
+    $potbtcstat = '<h4><a href="'. $btcurl .'">POT/BTC</a></h4>' . '฿' . $ratepotbtc;
     $content = "$potusdstat $potbtcstat";
 
     // WIDGET CODE GOES HERE
