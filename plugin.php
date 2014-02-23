@@ -9,6 +9,8 @@ Version: 1
 Author URI: https://github.com/dbsnurr
 */
 
+define('PTSW_DIR', WP_PLUGIN_DIR . '/potcoinstatswidget');
+include(PTSW_DIR . '/options.php');
 
 class PotcoinStatsWidget extends WP_Widget
 {
@@ -39,11 +41,14 @@ class PotcoinStatsWidget extends WP_Widget
     wp_enqueue_style( 'potcoinstatswidget-style', plugins_url('style.css', __FILE__) );
     extract($args, EXTR_SKIP);
 
+    $options = get_option('potsw_option_name');
+
     #pot/btc rate
-    $url = "https://cryptorush.in/api.php?get=market&m=pot&b=btc&json=true";
+    $url = "https://cryptorush.in/api.php?get=market&m=pot&b=btc&key=".$options['api_key']."&id=".$options['user_id']."&json=true";
     $json = file_get_contents($url);
     $result = json_decode($json, true);
-    $ratepotbtc = $result['last_buy'];
+    $market = $result['POT/BTC'];
+    $ratepotbtc = $market['last_buy'];
 
     #btc/usd rate
     $url = "https://blockchain.info/ticker";
