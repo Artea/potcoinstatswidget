@@ -72,8 +72,8 @@ class PotcoinStatsWidget extends WP_Widget
 
     $ratePotBtc = getAveragePrice($potRates, 'POT');
     $rateBtcUsd = getAveragePrice($btcRates, 'BTC');
+    $ratePotUsd = number_format(($ratePotBtc * $rateBtcUsd),8,'.','');
 
-    $ratePotUsd = ($ratePotBtc * $rateBtcUsd);
     $potUsd = '<h4>POT/USD</h4>' . '$' . $ratePotUsd;
     $potBtc = '<h4>POT/BTC</h4>' . '฿' . $ratePotBtc;
     $content = "$potUsd $potBtc";
