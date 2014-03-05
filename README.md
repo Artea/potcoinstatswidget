@@ -19,4 +19,5 @@ Changelog
 -------------------
 
 1.0 2014-02-16 Initial release
+
 1.1 2014-03-05 Added database caching of api requests and new exchange (http://swisscex.com/)
