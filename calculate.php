@@ -1,6 +1,9 @@
 <?php
 
   function apiRequest($url, $json) {
+    $scheme = parse_url($url);
+    $scheme = $scheme['scheme'];
+    $delay = stream_context_create(array($scheme => array('timeout' => 5)));
     $response = file_get_contents($url);
     $result = $response;
     if($json) {
