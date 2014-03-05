@@ -23,14 +23,16 @@ BTC/USD
  * http://blockchain.info/ (public)
  * http://bitcoinaverage.com/ (public)
 
-For the plugin to work a source for POT/BTC data and BTC/USD data is required. Sources marked with 'public' do not require an api key while those marked as 'private' do. Go to the following locations to generate an API key.
+For the plugin to work a source for POT/BTC data and one for BTC/USD data is required. Sources marked with 'public' do not require an api key while those marked as 'private' do. Go to the following locations to generate an API key.
 
-Swisscex: https://www.swisscex.com/profile/configuration/
-Cryptorush: https://cryptorush.in/index.php?p=settings
+* Swisscex: https://www.swisscex.com/profile/configuration/
+* Cryptorush: https://cryptorush.in/index.php?p=settings
 
 You are not required to enter an API key for both sites but you NEED at least one. For cryptorush.in the user id number is also required, should be present on the same page as the API key.
 
-When you have generated your API key, copy it in your clipboard, and paste it in the section for the site you generated the API key on. Press Save Changes.
+When you have generated your API key, copy it in your clipboard, then head over to your wordpress sites' settings. Paste the key in the section for the site you generated the API key on.
+
+Press Save Changes.
 
 The last step is to drag the widget to a widget area (Appearance -> Widgets -> Potcoin Exchange Rate). For example your sidebar. Optionally set another title, if not then "Potcoin Exchange Rate" will be used as default. Click save and you're done. Enjoy the view!
 
