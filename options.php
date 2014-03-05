@@ -1,5 +1,5 @@
 <?php
-class MySettingsPage
+class PTSWSettingsPage
 {
     /**
      * Holds the values to be used in the fields callbacks
@@ -22,10 +22,10 @@ class MySettingsPage
     {
         // This page will be under "Settings"
         add_options_page(
-            'Potcoin Stats Widget', 
-            'Potcoin Stats Widget', 
-            'manage_options', 
-            'potsw-setting-admin', 
+            'Potcoin Stats Widget',
+            'Potcoin Stats Widget',
+            'manage_options',
+            'potsw-setting-admin',
             array( $this, 'create_admin_page' )
         );
     }
@@ -40,13 +40,13 @@ class MySettingsPage
         ?>
         <div class="wrap">
             <?php screen_icon(); ?>
-            <h2>Potcoin Stats Widget Settings</h2>           
+            <h2>Potcoin Stats Widget Settings</h2>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
-                settings_fields( 'my_option_group' );   
+                settings_fields( 'my_option_group' );
                 do_settings_sections( 'my-setting-admin' );
-                submit_button(); 
+                submit_button();
             ?>
             </form>
         </div>
@@ -65,27 +65,43 @@ class MySettingsPage
         );
 
         add_settings_section(
-            'setting_section_id', // ID
+            'setting_section_id_cryptorush', // ID
             '<a href="http://cryptorush.in">Cryptorush.in</a> API Settings', // Title
             array( $this, 'print_section_info' ), // Callback
             'my-setting-admin' // Page
-        );  
+        );
 
         add_settings_field(
-            'user_id', // ID
-            'User ID', // Title 
-            array( $this, 'user_id_callback' ), // Callback
+            'user_id_cryptorush', // ID
+            'Cryptorush.in User ID', // Title
+            array( $this, 'user_id_cryptorush_callback' ), // Callback
             'my-setting-admin', // Page
-            'setting_section_id' // Section           
-        );      
+            'setting_section_id_cryptorush' // Section
+        );
 
         add_settings_field(
-            'api_key', 
-            'API Key', 
-            array( $this, 'api_key_callback' ), 
-            'my-setting-admin', 
-            'setting_section_id'
-        );      
+            'api_key_cryptorush',
+            'Cryptorush.in API Key',
+            array( $this, 'api_key_cryptorush_callback' ),
+            'my-setting-admin',
+            'setting_section_id_cryptorush'
+        );
+
+        add_settings_section(
+            'setting_section_id_swissecex', // ID
+            '<a href="http://swissecex.com">Swissecex.com</a> API Settings', // Title
+            array( $this, 'print_section_info' ), // Callback
+            'my-setting-admin' // Page
+        );
+
+        add_settings_field(
+            'api_key_swissecex',
+            'Swissecex.com API Key',
+            array( $this, 'api_key_swissecex_callback' ),
+            'my-setting-admin',
+            'setting_section_id_swissecex'
+        );
+
     }
 
     /**
@@ -96,45 +112,57 @@ class MySettingsPage
     public function sanitize( $input )
     {
         $new_input = array();
-        if( isset( $input['user_id'] ) )
-            $new_input['user_id'] = absint( $input['user_id'] );
+        if( isset( $input['user_id_cryptorush'] ) )
+            $new_input['user_id_cryptorush'] = absint( $input['user_id_cryptorush'] );
 
-        if( isset( $input['api_key'] ) )
-            $new_input['api_key'] = sanitize_text_field( $input['api_key'] );
+        if( isset( $input['api_key_cryptorush'] ) )
+            $new_input['api_key_cryptorush'] = sanitize_text_field( $input['api_key_cryptorush'] );
+
+        if( isset( $input['api_key_swissecex'] ) )
+            $new_input['api_key_swissecex'] = sanitize_text_field( $input['api_key_swissecex'] );
 
         return $new_input;
     }
 
-    /** 
+    /**
      * Print the Section text
      */
     public function print_section_info()
     {
-        print 'Enter your settings below:';
+        print 'Enter your API settings below:';
     }
 
-    /** 
+    /**
      * Get the settings option array and print one of its values
      */
-    public function user_id_callback()
+    public function user_id_cryptorush_callback()
     {
         printf(
-            '<input type="text" id="user_id" name="potsw_option_name[user_id]" value="%s" />',
-            isset( $this->options['user_id'] ) ? esc_attr( $this->options['user_id']) : ''
+            '<input type="text" id="user_id_cryptorush" name="potsw_option_name[user_id_cryptorush]" value="%s" />',
+            isset( $this->options['user_id_cryptorush'] ) ? esc_attr( $this->options['user_id_cryptorush']) : ''
         );
     }
 
-    /** 
+    /*
      * Get the settings option array and print one of its values
      */
-    public function api_key_callback()
+    public function api_key_cryptorush_callback()
     {
         printf(
-            '<input type="text" id="api_key" name="potsw_option_name[api_key]" value="%s" />',
-            isset( $this->options['api_key'] ) ? esc_attr( $this->options['api_key']) : ''
+            '<input type="text" id="api_key_cryptorush" name="potsw_option_name[api_key_cryptorush]" value="%s" />',
+            isset( $this->options['api_key_cryptorush'] ) ? esc_attr( $this->options['api_key_cryptorush']) : ''
         );
     }
+
+    public function api_key_swissecex_callback()
+    {
+        printf(
+            '<input type="text" id="api_key_swissecex" name="potsw_option_name[api_key_swissecex]" value="%s" />',
+            isset( $this->options['api_key_swissecex'] ) ? esc_attr( $this->options['api_key_swissecex']) : ''
+        );
+    }
+
 }
 
 if( is_admin() )
-    $my_settings_page = new MySettingsPage();
+    $settings_page = new PTSWSettingsPage();

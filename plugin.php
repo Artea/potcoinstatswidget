@@ -11,6 +11,11 @@ Author URI: https://github.com/dbsnurr
 
 define('PTSW_DIR', dirname(__FILE__));
 include(PTSW_DIR . '/options.php');
+include(PTSW_DIR . '/calculate.php');
+include(PTSW_DIR . '/database.php');
+include(PTSW_DIR . '/sources.php');
+
+register_activation_hook(__FILE__, array('PotcoinStatsWidgetDatabase','ptsw_install') );
 
 class PotcoinStatsWidget extends WP_Widget
 {
@@ -40,25 +45,8 @@ class PotcoinStatsWidget extends WP_Widget
   {
     wp_enqueue_style( 'potcoinstatswidget-style', plugins_url('style.css', __FILE__) );
     extract($args, EXTR_SKIP);
-
     $options = get_option('potsw_option_name');
-
-    #pot/btc rate
-    $url = "https://cryptorush.in/api.php?get=market&m=pot&b=btc&key=".$options['api_key']."&id=".$options['user_id']."&json=true";
-    $json = file_get_contents($url);
-    $result = json_decode($json, true);
-    $market = $result['POT/BTC'];
-    $ratepotbtc = $market['last_buy'];
-
-    #btc/usd rate
-    $url = "https://blockchain.info/ticker";
-    $json = file_get_contents($url);
-    $result = json_decode($json, true);
-    $ratebtcusd = $result['USD'];
-    $ratebtcusd = $ratebtcusd['last'];
-
-    #pot/usd
-    $ratepotusd = ($ratepotbtc * $ratebtcusd);
+    $ptsw_db= new PotcoinStatsWidgetDatabase();
 
     echo $before_widget;
     $title = $instance['title'];
@@ -69,11 +57,26 @@ class PotcoinStatsWidget extends WP_Widget
         echo $before_title . "Potcoin Exchange Rate" . $after_title;
     }
 
-    $poturl = "https://cryptorush.in/index.php?p=trading&m=POT&b=BTC";
-    $btcurl = "https://blockchain.info";
-    $potusdstat = '<h4><a href="'. $poturl .'">POT/USD</a></h4>' . '$' . $ratepotusd;
-    $potbtcstat = '<h4><a href="'. $btcurl .'">POT/BTC</a></h4>' . '฿' . $ratepotbtc;
-    $content = "$potusdstat $potbtcstat";
+    $potRates = $ptsw_db->ptsw_get_rate('POT','BTC');
+    $btcRates = $ptsw_db->ptsw_get_rate('BTC','USD');
+
+    if(!($potRates) OR (!($btcRates))) {
+        updateRates($options);
+        $potRates = $ptsw_db->ptsw_get_rate('POT','BTC');
+        $btcRates = $ptsw_db->ptsw_get_rate('BTC','USD');
+    }
+
+    $ratePotBtc = 0;
+    $rateBtcUsd = 0;
+    $ratePotUsd = 0;
+
+    $ratePotBtc = getAveragePrice($potRates, 'POT');
+    $rateBtcUsd = getAveragePrice($btcRates, 'BTC');
+
+    $ratePotUsd = ($ratePotBtc * $rateBtcUsd);
+    $potUsd = '<h4>POT/USD</h4>' . '$' . $ratePotUsd;
+    $potBtc = '<h4>POT/BTC</h4>' . '฿' . $ratePotBtc;
+    $content = "$potUsd $potBtc";
 
     // WIDGET CODE GOES HERE
     echo $content;
