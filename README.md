@@ -18,5 +18,5 @@ Potcoin Stats Widget under TwentyFourteen theme.
 Changelog
 -------------------
 
-2014-02-16 1.0 Initial release
-2014-03-05 1.1 Added database caching of api requests and new exchange (http://swisscex.com/)
+1.0 2014-02-16 Initial release
+1.1 2014-03-05 Added database caching of api requests and new exchange (http://swisscex.com/)
