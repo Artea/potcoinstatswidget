@@ -34,6 +34,8 @@ When you have generated your API key, copy it in your clipboard, then head over 
 
 Press Save Changes.
 
+The exchange rates are cached in the database for 15 minutes.
+
 The last step is to drag the widget to a widget area (Appearance -> Widgets -> Potcoin Exchange Rate). For example your sidebar. Optionally set another title, if not then "Potcoin Exchange Rate" will be used as default. Click save and you're done. Enjoy the view!
 
 <img src="http://i.imgur.com/6IxCdEu.png">
