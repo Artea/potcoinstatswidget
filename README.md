@@ -6,7 +6,7 @@ Wordpress plugin to show POT/USD and POT/BTC exchange rates
 Installation
 -------------------
 
-1. Download Zip
+1. Download latest release (currently 1.2).
 2. Upload and extract to wp-content/plugins/potcoinstatswidget or use Wordpress' built in plugin installer
 3. Activate plugin in Wordpress (Plugins -> Installed Plugins -> Potcoin Stats Widget -> Activate)
 
