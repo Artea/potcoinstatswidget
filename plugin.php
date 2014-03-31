@@ -5,7 +5,7 @@ Plugin Name: Potcoin Stats Widget
 Plugin URI: https://github.com/dbsnurr/potcoinstatswidget
 Description: Display the latest potcoin / usd exchange rate
 Author: dbsnurr
-Version: 1.1
+Version: 1.2
 Author URI: https://github.com/dbsnurr
 */
 
