@@ -17,8 +17,18 @@ function updateRates($options) {
 
     $name = 'swisscex.com';
     $coins = array('from' => 'POT','to' => 'BTC');
-    $url = "http://api.swisscex.com/quote/POT/BTC/?apiKey=".$options['api_key_swissecex']."";
+    $url = "http://api.swisscex.com/quote/POT/BTC/?apiKey=".$options['api_key_swissecex'];
     $jsonpath = array('quote', 'lastPrice');
+    $result = apiRequest($url, $jsonpath);
+    if($result) {
+        $rate = floatval($result);
+        $ptsw_db->ptsw_add_rate($coins['from'],$coins['to'],$rate);
+    }
+    
+    $name = 'mintpal.com';
+    $coins = array('from' => 'POT','to' => 'BTC');
+    $url = "https://api.mintpal.com/market/stats/POT/BTC";
+    $jsonpath = array('last_price');
     $result = apiRequest($url, $jsonpath);
     if($result) {
         $rate = floatval($result);
