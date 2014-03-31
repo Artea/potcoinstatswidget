@@ -5,6 +5,7 @@ function updateRates($options) {
     $ptsw_db = new PotcoinStatsWidgetDatabase();
 
     #pot/btc rate
+    /* //Since cryptorush are having issues right now it is temporarily disabled
     $name = "cryptorush.in";
     $url = "https://cryptorush.in/api.php?get=market&m=pot&b=btc&key=".$options['api_key_cryptorush']."&id=".$options['user_id_cryptorush']."&json=true";
     $coins = array('from' => 'POT','to' => 'BTC');
@@ -14,6 +15,7 @@ function updateRates($options) {
         $rate = floatval($result);
         $ptsw_db->ptsw_add_rate($coins['from'],$coins['to'],$rate);
     }
+    */
 
     $name = 'swisscex.com';
     $coins = array('from' => 'POT','to' => 'BTC');
