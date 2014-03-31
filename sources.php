@@ -37,6 +37,16 @@ function updateRates($options) {
         $ptsw_db->ptsw_add_rate($coins['from'],$coins['to'],$rate);
     }
 
+    $name = 'cryptsy.com';
+    $coins = array('from' => 'POT','to' => 'BTC');
+    $url = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=173";
+    $jsonpath = array('return','markets','POT','lasttradeprice');
+    $result = apiRequest($url, $jsonpath);
+    if($result) {
+        $rate = floatval($result);
+        $ptsw_db->ptsw_add_rate($coins['from'],$coins['to'],$rate);
+    }
+
     #btc/usd rate
     $name = 'bitcoinaverage.com';
     $url = 'https://api.bitcoinaverage.com/ticker/global/USD';
