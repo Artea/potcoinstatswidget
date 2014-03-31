@@ -30,7 +30,7 @@ function updateRates($options) {
     $name = 'mintpal.com';
     $coins = array('from' => 'POT','to' => 'BTC');
     $url = "https://api.mintpal.com/market/stats/POT/BTC";
-    $jsonpath = array('last_price');
+    $jsonpath = 'last_price';
     $result = apiRequest($url, $jsonpath);
     if($result) {
         $rate = floatval($result);
